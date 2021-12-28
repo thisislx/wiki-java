@@ -2,8 +2,12 @@ package com.wiki.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import javax.validation.constraints.NotNull;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -24,6 +28,7 @@ public class Book implements Serializable {
     private Integer id;
 
     @ApiModelProperty("书名")
+    @NotNull(message = "名字不能为空")
     private String name;
 
     @ApiModelProperty("分类1")
@@ -53,6 +58,7 @@ public class Book implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -60,6 +66,7 @@ public class Book implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getCategory1() {
         return category1;
     }
@@ -67,6 +74,7 @@ public class Book implements Serializable {
     public void setCategory1(String category1) {
         this.category1 = category1;
     }
+
     public String getCategory2() {
         return category2;
     }
@@ -74,6 +82,7 @@ public class Book implements Serializable {
     public void setCategory2(String category2) {
         this.category2 = category2;
     }
+
     public String getDescription() {
         return description;
     }
@@ -81,6 +90,7 @@ public class Book implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public Long getDocCount() {
         return docCount;
     }
@@ -88,6 +98,7 @@ public class Book implements Serializable {
     public void setDocCount(Long docCount) {
         this.docCount = docCount;
     }
+
     public Long getViewCount() {
         return viewCount;
     }
@@ -95,6 +106,7 @@ public class Book implements Serializable {
     public void setViewCount(Long viewCount) {
         this.viewCount = viewCount;
     }
+
     public Long getVoteCount() {
         return voteCount;
     }
@@ -102,6 +114,7 @@ public class Book implements Serializable {
     public void setVoteCount(Long voteCount) {
         this.voteCount = voteCount;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
@@ -113,15 +126,15 @@ public class Book implements Serializable {
     @Override
     public String toString() {
         return "Book{" +
-            "id=" + id +
-            ", name=" + name +
-            ", category1=" + category1 +
-            ", category2=" + category2 +
-            ", description=" + description +
-            ", docCount=" + docCount +
-            ", viewCount=" + viewCount +
-            ", voteCount=" + voteCount +
-            ", updateTime=" + updateTime +
-        "}";
+                "id=" + id +
+                ", name=" + name +
+                ", category1=" + category1 +
+                ", category2=" + category2 +
+                ", description=" + description +
+                ", docCount=" + docCount +
+                ", viewCount=" + viewCount +
+                ", voteCount=" + voteCount +
+                ", updateTime=" + updateTime +
+                "}";
     }
 }

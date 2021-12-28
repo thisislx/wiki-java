@@ -2,6 +2,8 @@ package com.wiki.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wiki.entity.Book;
@@ -10,6 +12,7 @@ import com.wiki.util.QueryPage;
 import com.wiki.util.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Api(tags = "书本管理")
 @RequestMapping("/api/book")
 @RestController
+@Validated
 public class BookController {
  @Autowired
  BookServiceImpl bookService;
@@ -44,7 +48,7 @@ public class BookController {
 
  @PostMapping("/add")
  @ApiOperation(value = "新增", httpMethod = "POST")
- Response add(@RequestBody Book book) {
+ Response add(@RequestBody @Valid Book book) {
   Boolean isReolve = bookService.save(book);
   return isReolve ? Response.ok("新增成功") : Response.fail("新增失败");
  }
@@ -54,6 +58,13 @@ public class BookController {
  Response remove(@RequestBody List<Integer> ids) {
   Boolean isRight = bookService.removeByIds(ids);
   return isRight ? Response.ok("删除成功") : Response.fail("删除失败");
+ }
+
+ @PostMapping("/update")
+ @ApiOperation(value = "更新", httpMethod = "POST")
+ Response update(@RequestBody Book book) {
+  Boolean isRight = bookService.updateById(book);
+  return isRight ? Response.ok("更新成功") : Response.fail("更新失败");
  }
 
 }

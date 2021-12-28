@@ -5,6 +5,9 @@ public class Response {
  private String message;
  private Object data;
 
+ Response() {
+ }
+
  Response(String message, Boolean success) {
   this.message = message;
   this.success = success;
