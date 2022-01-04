@@ -1,10 +1,13 @@
 package com.wiki.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2021-12-27
  */
 @ApiModel(value = "Book对象", description = "")
+@TableName(autoResultMap = true)
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,10 +36,12 @@ public class Book implements Serializable {
     private String name;
 
     @ApiModelProperty("分类1")
-    private String category1;
+    @TableField(typeHandler = FastjsonTypeHandler.class)
+    private List<Integer> category1;
 
     @ApiModelProperty("分类2")
-    private String category2;
+    @TableField(typeHandler = FastjsonTypeHandler.class)
+    private List<Integer> category2;
 
     @ApiModelProperty("描述")
     private String description;
@@ -49,7 +55,7 @@ public class Book implements Serializable {
     @ApiModelProperty("点赞数")
     private Long voteCount;
 
-    private LocalDateTime updateTime;
+    private String updateTime;
 
     public Integer getId() {
         return id;
@@ -67,19 +73,19 @@ public class Book implements Serializable {
         this.name = name;
     }
 
-    public String getCategory1() {
+    public List<Integer> getCategory1() {
         return category1;
     }
 
-    public void setCategory1(String category1) {
+    public void setCategory1(List<Integer> category1) {
         this.category1 = category1;
     }
 
-    public String getCategory2() {
+    public List<Integer> getCategory2() {
         return category2;
     }
 
-    public void setCategory2(String category2) {
+    public void setCategory2(List<Integer> category2) {
         this.category2 = category2;
     }
 
@@ -115,11 +121,11 @@ public class Book implements Serializable {
         this.voteCount = voteCount;
     }
 
-    public LocalDateTime getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 

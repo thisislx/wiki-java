@@ -2,6 +2,7 @@ package com.wiki.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 
 import io.swagger.annotations.ApiModel;
@@ -16,7 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2021-12-28
  */
 @ApiModel(value = "Category对象", description = "")
-public class Category implements Serializable {
+public class Category extends Tree implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

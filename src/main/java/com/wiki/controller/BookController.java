@@ -41,7 +41,7 @@ public class BookController {
  Response list(QueryPage query) {
   Page<Book> page = new Page<Book>(query.getCurrent(), query.getPageSize());
   QueryWrapper<Book> queryWrapper = new QueryWrapper<Book>();
-  queryWrapper.orderByAsc("update_time");
+  queryWrapper.orderByDesc("update_time");
   Page<Book> res = bookService.page(page, queryWrapper);
   return Response.ok(res);
  }
@@ -50,21 +50,22 @@ public class BookController {
  @ApiOperation(value = "新增", httpMethod = "POST")
  Response add(@RequestBody @Valid Book book) {
   Boolean isReolve = bookService.save(book);
-  return isReolve ? Response.ok("新增成功") : Response.fail("新增失败");
+  return isReolve ? Response.ok("新增成功") : Response.fail("新增失败", 400);
  }
 
  @PostMapping("/remove")
  @ApiOperation(value = "批量删除", httpMethod = "POST")
  Response remove(@RequestBody List<Integer> ids) {
   Boolean isRight = bookService.removeByIds(ids);
-  return isRight ? Response.ok("删除成功") : Response.fail("删除失败");
+  return isRight ? Response.ok("删除成功") : Response.fail("删除失败", 400);
  }
 
  @PostMapping("/update")
  @ApiOperation(value = "更新", httpMethod = "POST")
  Response update(@RequestBody Book book) {
   Boolean isRight = bookService.updateById(book);
-  return isRight ? Response.ok("更新成功") : Response.fail("更新失败");
+  return isRight ? Response.ok("更新成功") : Response.fail("更新失败", 400);
  }
-
 }
+
+

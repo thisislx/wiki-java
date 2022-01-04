@@ -1,19 +1,31 @@
 package com.wiki.exception;
 
-public class BusinessException extends RuntimeException{
 
-    private BusinessExceptionCode code;
 
-    public BusinessException (BusinessExceptionCode code) {
-        super(code.getDesc());
+public class BusinessException extends RuntimeException {
+
+    private BusinessExceptionCode mes;
+    private Integer code;
+
+    public BusinessException(BusinessExceptionCode mes, Integer code) {
+        super(mes.getDesc());
+        this.mes = mes;
         this.code = code;
     }
 
-    public BusinessExceptionCode getCode() {
+    public BusinessExceptionCode getMes() {
+        return mes;
+    }
+
+    public void setMes(BusinessExceptionCode mes) {
+        this.mes = mes;
+    }
+
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(BusinessExceptionCode code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 

@@ -28,7 +28,7 @@ public class ControllerExceptionHandler {
     @ResponseBody
     public Response validExceptionHandler(BindException e) {
         LOG.warn("参数校验失败：{}", e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
-        return Response.fail(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        return Response.fail(e.getBindingResult().getAllErrors().get(0).getDefaultMessage(), 400);
     }
 
     /**
@@ -40,8 +40,8 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(value = BusinessException.class)
     @ResponseBody
     public Response validExceptionHandler(BusinessException e) {
-        LOG.warn("业务异常：{}", e.getCode().getDesc());
-        return Response.fail(e.getCode().getDesc());
+        LOG.warn("业务异常：{}", e.getCode(), e.getMes().getDesc());
+        return Response.fail(e.getMes().getDesc(), e.getCode());
     }
 
     /**
@@ -54,9 +54,7 @@ public class ControllerExceptionHandler {
     @ResponseBody
     public Response validExceptionHandler(Exception e) {
         LOG.error("系统异常：", e);
-        return Response.fail("系统出现异常，请联系管理员");
+        return Response.fail("系统出现异常，请联系管理员", 500);
     }
-
-
 
 }

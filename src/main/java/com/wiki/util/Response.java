@@ -1,7 +1,11 @@
 package com.wiki.util;
 
+import lombok.Data;
+
+@Data
 public class Response {
  private Boolean success;
+ private Integer code = 200;
  private String message;
  private Object data;
 
@@ -13,9 +17,22 @@ public class Response {
   this.success = success;
  }
 
+ Response(String message, Integer code, Boolean success) {
+  this.message = message;
+  this.success = success;
+  this.code = code;
+ }
+
  Response(String message, Boolean success, Object data) {
   this.message = message;
   this.success = success;
+  this.data = data;
+ }
+
+ Response(String message, Integer code, Boolean success, Object data) {
+  this.success = success;
+  this.code = code;
+  this.message = message;
   this.data = data;
  }
 
@@ -31,32 +48,8 @@ public class Response {
   return new Response(message, true, data);
  }
 
- public static Response fail(String message) {
-  return new Response(message, false);
- }
-
- public Boolean getSuccess() {
-  return success;
- }
-
- public void setSuccess(Boolean success) {
-  this.success = success;
- }
-
- public String getMessage() {
-  return message;
- }
-
- public void setMessage(String message) {
-  this.message = message;
- }
-
- public Object getData() {
-  return data;
- }
-
- public void setData(Object data) {
-  this.data = data;
+ public static Response fail(String message, Integer code) {
+  return new Response(message, code, false);
  }
 
 }
